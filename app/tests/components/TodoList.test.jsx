@@ -22,13 +22,19 @@ describe('TodoList', () => {
       }, {
         id: 2,
         text: 'Validate email'
+      }, {
+        id: 3,
+        text: 'Walk with dog'
+      }, {
+        id: 4,
+        text: 'Feed the cat'
       }
     ];
 
     let todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
     let renderedTodos = TestUtils.scryRenderedComponentsWithType(todoList, Todo);
 
-    expect(renderedTodos.length).toBe(2);
+    expect(renderedTodos.length).toBe(4);
   });
 
 });
