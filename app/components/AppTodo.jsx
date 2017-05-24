@@ -2,6 +2,7 @@ let React = require('react');
 let TodoList = require('TodoList');
 let AddTodo = require('AddTodo');
 let TodoSearch = require('TodoSearch');
+let uuid = require('node-uuid');
 
 let AppTodo = React.createClass({
 
@@ -11,16 +12,16 @@ let AppTodo = React.createClass({
       showCompleted: false,
       todos: [
         {
-          id: 1,
+          id: uuid(),
           text: 'Walk with dog'
         }, {
-          id: 2,
+          id: uuid(),
           text: 'Feed the cat'
         }, {
-          id: 3,
+          id: uuid(),
           text: 'Read book'
         }, {
-          id: 4,
+          id: uuid(),
           text: 'Play video games'
         }
       ]
@@ -28,11 +29,18 @@ let AppTodo = React.createClass({
   },
 
   handleAddTodo(text) {
-    alert('Trying add ' + text)
+    this.setState({
+      todos: [
+        ...this.state.todos,
+        {
+          id: uuid(),
+          text
+        }
+      ]
+    })
   },
 
   handleSearch(textSearch, showCompleted) {
-    alert(textSearch, showCompleted);
     this.setState({
       textSearch: textSearch.toLowerCase(),
       showCompleted
