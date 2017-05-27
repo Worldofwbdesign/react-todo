@@ -20,13 +20,16 @@ describe('AppTodo', () => {
     appTodo.handleAddTodo(todoText);
 
     expect(appTodo.state.todos[0].text).toBe(todoText);
+    expect(appTodo.state.todos[0].dateCreated).toBeA('number');
   });
 
   it('should toggle completed state when handleToggle called', () => {
     const todoData = {
       id: 11,
       text: 'test features',
-      completed: false
+      completed: false,
+      dateCreated: 0,
+      dateCompleted: undefined
     };
 
     let appTodo = TestUtils.renderIntoDocument(<AppTodo/>);
@@ -35,7 +38,27 @@ describe('AppTodo', () => {
     expect(appTodo.state.todos[0].completed).toBe(false);
     appTodo.handleToggle(11);
     expect(appTodo.state.todos[0].completed).toBe(true);
+    expect(appTodo.state.todos[0].dateCompleted).toBeA('number');
 
-  })
+  });
+
+  it('should remove completed date on handleToggle called', () => {
+    const todoData = {
+      id: 11,
+      text: 'test features',
+      completed: true,
+      dateCreated: 0,
+      dateCompleted: 123
+    };
+
+    let appTodo = TestUtils.renderIntoDocument(<AppTodo/>);
+    appTodo.setState({ todos: [todoData] });
+
+    expect(appTodo.state.todos[0].completed).toBe(true);
+    appTodo.handleToggle(11);
+    expect(appTodo.state.todos[0].completed).toBe(false);
+    expect(appTodo.state.todos[0].dateCompleted).toNotExist();
+
+  });
 
 });
