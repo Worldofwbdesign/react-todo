@@ -28,6 +28,7 @@ let AppTodo = React.createClass({
         {
           id: uuid(),
           text,
+          completed: false,
           dateCreated: moment().unix(),
           dateCompleted: undefined
         }
