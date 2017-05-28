@@ -1,42 +1,38 @@
-let React = require('react');
-let moment = require('moment');
+var React = require('react');
+var {connect} = require('react-redux');
+var moment = require('moment');
+var actions = require('actions');
 
-let Todo = React.createClass({
-
-  render() {
-    let { id, text, completed, dateCreated, dateCompleted } = this.props;
-    let completedClass = completed ? 'todo todo_completed' : 'todo';
-
-    let renderDate = () => {
-      let message = 'Created ';
-      var timeStamp = dateCreated;
+export var Todo = React.createClass({
+  render: function () {
+    var {id, text, completed, createdAt, completedAt, dispatch} = this.props;
+    var todoClassName = completed ? 'todo todo-completed' : 'todo';
+    var renderDate = () => {
+      var message = 'Created ';
+      var timestamp = createdAt;
 
       if (completed) {
         message = 'Completed ';
-        timeStamp = dateCompleted;
+        timestamp = completedAt;
       }
 
-      return message + moment.unix(timeStamp).format('MMMM Do YYYY, h:mm:ss a');
+      return message + moment.unix(timestamp).format('MMM Do YYYY @ h:mm a');
     };
 
     return (
-      <div className={completedClass} onClick={() => {
-        this.props.onToggle(id);
-      }}>
-        <input type="checkbox" checked={completed}/>
+      <div className={todoClassName} onClick={() => {
+          dispatch(actions.toggleTodo(id));
+        }}>
         <div>
-          <span>
-            {text}
-          </span>
-          <span className='todo__date'>
-            { renderDate() }
-          </span>
+          <input type="checkbox" checked={completed}/>
         </div>
-
+        <div>
+          <p>{text}</p>
+          <p className="todo__subtext">{renderDate()}</p>
+        </div>
       </div>
     )
   }
-
 });
 
-module.exports = Todo;
+export default connect()(Todo);

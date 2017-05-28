@@ -1,50 +1,43 @@
-let expect = require('expect');
-
-let actions = require('actions');
+var expect = require('expect');
+var actions = require('actions');
 
 describe('Actions', () => {
-
-  it('should update search text on setSearchText action generator call', () => {
-    let action = {
+  it('should generate search text action', () => {
+    var action = {
       type: 'SET_SEARCH_TEXT',
       searchText: 'Some search text'
-    }
-
-    let res = actions.setSearchText(action.searchText);
+    };
+    var res = actions.setSearchText(action.searchText);
 
     expect(res).toEqual(action);
   });
 
-  it('should generate addTodo action', () => {
-    let action = {
+  it('should generate toggle show completed action', () => {
+    var action = {
+      type: 'TOGGLE_SHOW_COMPLETED'
+    };
+    var res = actions.toggleShowCompleted();
+
+    expect(res).toEqual(action);
+  });
+
+  it('should generate add todo action', () => {
+    var action = {
       type: 'ADD_TODO',
-      text: 'EAT'
-    }
-
-    let res = actions.addTodo(action.text);
-
-    expect(res).toEqual(action);
-  });
-
-  it('should generate toggleShowCompleted action', () => {
-    let action = {
-      type: 'TOGGLE_SHOW_COMPLETED',
-    }
-
-    let res = actions.toggleShowCompleted();
+      text: 'Thing to do'
+    };
+    var res = actions.addTodo(action.text);
 
     expect(res).toEqual(action);
   });
 
-  it('should generate toggleTodo action', () => {
-    let action = {
+  it('should generate toggle todo action', () => {
+    var action = {
       type: 'TOGGLE_TODO',
-      id: 2
-    }
-
-    let res = actions.toggleTodo(2);
+      id: '123'
+    };
+    var res = actions.toggleTodo(action.id);
 
     expect(res).toEqual(action);
   });
-
-})
+});

@@ -1,29 +1,36 @@
-let React = require('react');
-let Todo = require('Todo');
+var React = require('react');
+var {connect} = require('react-redux');
+import Todo from 'Todo';
 
-let TodoList = React.createClass({
-
-  render() {
-    let { todos } = this.props;
-
-    let renderTodoList = () => {
+export var TodoList = React.createClass({
+  render: function () {
+    var {todos} = this.props;
+    var renderTodos = () => {
       if (todos.length === 0) {
-        return <span className='no-result'>Nothing to show</span>
-      } else {
-        return todos.map( (todo) => {
-          return <Todo key={todo.id} {...todo} onToggle={this.props.onToggle}/>
-        });
+        return (
+          <p className="container__message">Nothing To Do</p>
+        );
       }
 
+      return todos.map((todo) => {
+        return (
+          <Todo key={todo.id} {...todo}/>
+        );
+      });
     };
 
     return (
-      <div className='container__list'>
-        {renderTodoList()}
+      <div>
+        {renderTodos()}
       </div>
     )
   }
-
 });
 
-module.exports = TodoList;
+export default connect(
+  (state) => {
+    return {
+      todos: state.todos
+    };
+  }
+)(TodoList);

@@ -1,26 +1,23 @@
-const React = require('react');
+var React = require('react');
 
-let TodoSearch = React.createClass({
+var TodoSearch = React.createClass({
+  handleSearch: function () {
+    var showCompleted = this.refs.showCompleted.checked;
+    var searchText = this.refs.searchText.value;
 
-  handleChange() {
-    let textSearch    = this.refs.textSearch.value,
-        showCompleted = this.refs.showCompleted.checked;
-
-    this.props.onSearch(textSearch, showCompleted);
+    this.props.onSearch(showCompleted, searchText);
   },
-
-  render() {
+  render: function () {
     return (
-      <div className='container__search'>
+      <div className="container__header">
         <div>
-          <input type="search" ref="textSearch" placeholder="Search todos" onChange={this.handleChange}/>
+          <input type="search" ref="searchText" placeholder="Search todos" onChange={this.handleSearch}/>
         </div>
         <div>
           <label>
-            <input type="checkbox" ref="showCompleted" onChange={this.handleChange}/>
-            <span>Show completed todos</span>
+            <input type="checkbox" ref="showCompleted" onChange={this.handleSearch}/>
+            Show completed todos
           </label>
-
         </div>
       </div>
     )
