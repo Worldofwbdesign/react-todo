@@ -39,6 +39,31 @@ describe('Reducers', () => {
       expect(res[0].text).toEqual(action.text);
     });
 
+    it('should add todos from locale storage', () => {
+      var todos = [{
+        id: 1,
+        text: 'Feed dog',
+        completed: false,
+        completedAt: undefined,
+        createdAt: 33000
+      }, {
+        id: 2,
+        text: 'Feed cat',
+        completed: false,
+        completedAt: undefined,
+        createdAt: 34000
+      }]
+      var action = {
+        type: 'ADD_TODOS',
+        todos
+      };
+
+      var res = reducers.todosReducer(df([]), df(action))
+
+      expect(res.length).toBe(2);
+      expect(res[1]).toEqual(todos[1]);
+    });
+
     it('should toggle todo', () => {
       var todos = [{
         id: '123',
