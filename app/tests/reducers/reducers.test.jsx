@@ -31,12 +31,17 @@ describe('Reducers', () => {
     it('should add new todo', () => {
       var action = {
         type: 'ADD_TODO',
-        text: 'Walk the dog'
+        todo: {
+          id: '234234253',
+          text: 'Add new item',
+          completed: false,
+          createdAt: 50000
+        }
       };
       var res = reducers.todosReducer(df([]), df(action));
 
       expect(res.length).toEqual(1);
-      expect(res[0].text).toEqual(action.text);
+      expect(res[0]).toEqual(action.todo);
     });
 
     it('should add todos from locale storage', () => {
