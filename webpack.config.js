@@ -2,7 +2,6 @@ var webpack = require('webpack');
 var path = require('path');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-console.log(process.env.NODE_ENV);
 
 module.exports = {
   entry: [
@@ -15,6 +14,7 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       '$': 'jquery',
       'jQuery': 'jquery'
     }),
