@@ -3,12 +3,12 @@ import firebase from 'firebase';
 
 try {
   var config = {
-    apiKey: "AIzaSyAFL7qUUy8iCSMaG3yENcJSs9sFguibEs4",
-    authDomain: "roman-todo-app.firebaseapp.com",
-    databaseURL: "https://roman-todo-app.firebaseio.com",
-    projectId: "roman-todo-app",
-    storageBucket: "roman-todo-app.appspot.com",
-    messagingSenderId: "554466164182"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.API_KEY,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID
   };
   // Initialize Firebase
   firebase.initializeApp(config);
