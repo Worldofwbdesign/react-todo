@@ -93,4 +93,29 @@ describe('Reducers', () => {
       expect(res[0].text).toEqual(todos[0].text);
     });
   });
+
+  describe('authReducer', () => {
+
+    it('should set users uid', () => {
+      let action = {
+        type: 'LOGIN',
+        uid: '11242353453451'
+      }
+      let res = reducers.authReducer(df([]), df(action));
+
+      expect(res.uid).toEqual(action.uid);
+    });
+
+    it('should delete users uid', () => {
+      let action = {
+        type: 'LOGOUT'
+      };
+      var auth = {
+        uid: '123142564464'
+      };
+      let res = reducers.authReducer(df(auth), df(action));
+
+      expect(res.uid).toEqual(undefined);
+    });
+  })
 });
