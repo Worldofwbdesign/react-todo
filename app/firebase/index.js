@@ -16,6 +16,6 @@ try {
   console.log('Something goes wrong', e);
 }
 
+export const githubProvider = new firebase.auth.GithubAuthProvider();
 export let firebaseRef = firebase.database().ref();
-
 export default firebase;
