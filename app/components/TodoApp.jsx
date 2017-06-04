@@ -10,7 +10,7 @@ export var TodoApp = React.createClass({
   onUnlogin(e) {
     e.preventDefault();
     let {dispatch} = this.props;
-    dispatch(actions.startUnlogin());
+    dispatch(actions.startLogout());
   },
   render: function () {
     return (
